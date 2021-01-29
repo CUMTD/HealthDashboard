@@ -1,0 +1,28 @@
+{
+	"Serilog": {
+		"Using": [
+			"Serilog.Sinks.Console",
+			"Serilog.Sinks.Seq",
+			"Serilog.Enrichers.Environment",
+			"Serilog.Enrichers.Process",
+			"Serilog.Enrichers.Thread"
+		],
+		"MinimumLevel": {
+			"Default": "Information", // Fatal, Error, Warning, Information, Debug, Verbose
+			"Override": {
+				"Microsoft": "Warning",
+				"System": "Warning",
+				"Microsoft.Hosting.Lifetime": "Information"
+			}
+		},
+		"Enrich": [
+			"FromLogContext",
+			"WithMachineName",
+			"WithEnvironmentUserName",
+			"WithProcessId",
+			"WithThreadId",
+			"WithAssemblyName",
+			"WithAssemblyVersion"
+		]
+	}
+}

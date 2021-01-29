@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthDashboard", "HealthDashboard\HealthDashboard.csproj", "{4A8E14E1-E076-4FCB-A562-0D5B0E667F8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A0BE2B13-0C63-4A41-9E4C-E5A648461C5C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A8E14E1-E076-4FCB-A562-0D5B0E667F8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A8E14E1-E076-4FCB-A562-0D5B0E667F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A8E14E1-E076-4FCB-A562-0D5B0E667F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A8E14E1-E076-4FCB-A562-0D5B0E667F8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80B719B8-ABEA-4B4B-BDD0-8792CB53C75F}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,51 @@
+:root {
+	--primaryColor: #0071ce;
+	--secondaryColor: #476f86;
+	--darkColor: #000000;
+	--midDarkColor: #002f87;
+	--grayColor: #000;
+	--midGrayColor: #53565a;
+	--lightColor: #fff;
+	--dangerColor: #e10027;
+	--warningColor: #fbce39;
+	--successColor: #318d3a;
+	--bgMain: var(--lightColor);
+	--bgSecondary: #ffffff;
+	--fcNegative: #ffffff;
+	--fcBase: var(--grayColor);
+	--bgAside: var(--midDarkColor);
+	--bgMenuActive: rgba(0,0,0, 0.25);
+	--bcMenuActive: var(--primaryColor);
+	--bcInput: var(--midGrayColor);
+	--bcInputHover: var(--primaryColor);
+	--bgInputHover: var(--primaryColor);
+	--fcInputHover: var(--primaryColor);
+	--bcTable: var(--midGrayColor);
+	--bgTable: var(--bgSecondary);
+	--bgTableSecondary: #002f87;
+	--bgTableButton: var(--bgSecondary);
+	--bgButton: var(--secondaryColor);
+	--bgImageDarken: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+	--bgImageLigthen: linear-gradient( rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8) );
+	--logoImageUrl: url('/image/logo.svg');
+}
+
+.hc-aside__logo {
+	background-repeat: no-repeat;
+	background-size: 28px auto;
+}
+
+.hc-aside.is-open .hc-aside__logo {
+	background-size: 48px auto;
+}
+
+.tag {
+	line-height: 1;
+	padding: 4px 8px;
+	font-size: 12px;
+	height: 22px;
+}
+
+.hc-checks-table__header th {
+	color: var(--lightColor);
+}
