@@ -64,6 +64,21 @@ These should be defined in `healthchecks.json`.
 }
 ```
 
+## Adding Web Hooks
+You can define web hooks in the "HealthChecksUI" section of the config. An example of a Teams webhook is as follows.
+
+```json
+"HealthChecksUI": {
+	"Webhooks": [
+      {
+        "Name": "Teams",
+        "Uri": "{Your Webhook URL}",
+        "Payload": "{\"@context\": \"http://schema.org/extensions\",\"@type\": \"MessageCard\",\"themeColor\": \"e10027\",\"title\": \"[[LIVENESS]] has failed!\",\"text\": \"[[FAILURE]]. Click **Learn More** to view Health Dashboard!\",\"potentialAction\": [{\"@type\": \"OpenUri\",\"name\": \"Learn More\",\"targets\": [{ \"os\": \"default\", \"uri\": \"https://foo.bar/\" }]}]}"
+      }
+    ]
+}
+```
+
 ## Logging
 
 This application uses [Serilog][sl] for logging and is intended to use a [Seq][seq] sink.
