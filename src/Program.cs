@@ -42,23 +42,31 @@ namespace HealthDashboard
 
 		public static IHostBuilder CreateHostBuilder(string[] args) => Host
 			.CreateDefaultBuilder(args)
-			.ConfigureAppConfiguration((hostingContext, config) => config.AddEnvironmentVariables("HealthDashboard_"))
+			.ConfigureAppConfiguration((hostingContext, config) => {
+				_ = config
+					.AddJsonFile("appsettings.json", false, true)
+					.AddJsonFile($"logSettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
+					.AddJsonFile("hostsettings.json", true, true)
+					.AddJsonFile($"healthchecks.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true);
+				if (hostingContext.HostingEnvironment.IsDevelopment())
+				{
+					_ = config.AddUserSecrets<Program>();
+				}
+				else
+				{
+					_ = config.AddEnvironmentVariables("HealthDashboard_");
+				}
+
+			})
 			.UseSerilog()
 			.ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
 
 		private static IConfiguration BuildConfiguration()
 		{
 			var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-			var isDevelopment = environment == Environments.Development;
 			var configBuilder = new ConfigurationBuilder()
 				.AddJsonFile("logSettings.json", false, true)
 				.AddJsonFile($"logSettings.{environment}.json", true, true);
-
-			if (isDevelopment)
-			{
-				configBuilder = configBuilder.AddUserSecrets<Program>();
-			}
-
 			return configBuilder.Build();
 		}
 	}
