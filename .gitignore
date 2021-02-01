@@ -271,5 +271,5 @@ __pycache__/
 **/.config/
 
 # Custom
-**/hostsettings.json
-**/hostsettings.*.json
+**/healthchecks.json
+**/healthchecks.*.json

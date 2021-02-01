@@ -13,11 +13,19 @@ namespace HealthDashboard
 		public string Uri { get; set; }
 	}
 
+	public class WebHooksConfig
+	{
+		public string Name { get; set; }
+		public string Uri { get; set; }
+		public string Payload { get; set; }
+	}
+
 	public class HealthChecksUIConfig
 	{
 		public int EvaluationTimeinSeconds { get; set; }
 		public int MinimumSecondsBetweenFailureNotifications { get; set; }
 		public IEnumerable<HealthCheckConfig> HealthChecks { get; set; }
+		public IEnumerable<WebHooksConfig> Webhooks { get; set; }
 	}
 
 	public class DashboardConfig

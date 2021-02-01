@@ -70,12 +70,12 @@ You can define web hooks in the "HealthChecksUI" section of the config. An examp
 ```json
 "HealthChecksUI": {
 	"Webhooks": [
-      {
-        "Name": "Teams",
-        "Uri": "{Your Webhook URL}",
-        "Payload": "{\"@context\": \"http://schema.org/extensions\",\"@type\": \"MessageCard\",\"themeColor\": \"e10027\",\"title\": \"[[LIVENESS]] has failed!\",\"text\": \"[[FAILURE]]. Click **Learn More** to view Health Dashboard!\",\"potentialAction\": [{\"@type\": \"OpenUri\",\"name\": \"Learn More\",\"targets\": [{ \"os\": \"default\", \"uri\": \"https://foo.bar/\" }]}]}"
-      }
-    ]
+	  {
+		"Name": "Teams",
+		"Uri": "{Your Webhook URL}",
+		"Payload": "{\"@context\": \"http://schema.org/extensions\",\"@type\": \"MessageCard\",\"themeColor\": \"e10027\",\"title\": \"[[LIVENESS]] has failed!\",\"text\": \"[[FAILURE]]. Click **Learn More** to view Health Dashboard!\",\"potentialAction\": [{\"@type\": \"OpenUri\",\"name\": \"Learn More\",\"targets\": [{ \"os\": \"default\", \"uri\": \"https://foo.bar/\" }]}]}"
+	  }
+	]
 }
 ```
 
