@@ -8,6 +8,8 @@ namespace HealthDashboard
 {
 	public class Program
 	{
+		private const string EnvironmentPrefix = "HealthDashboard";
+
 		public static void Main(string[] args)
 		{
 			string assembly = default;
@@ -15,11 +17,11 @@ namespace HealthDashboard
 			{
 				assembly = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
 
-				var configuration = BuildConfiguration();
+				var loggingConfig = BuildLoggingConfiguration();
 
 				Log.Logger = new LoggerConfiguration()
 					.ReadFrom
-					.Configuration(configuration)
+					.Configuration(loggingConfig)
 					.CreateLogger();
 
 				Log.Information("{assemblyName} starting.", assembly);
@@ -45,8 +47,8 @@ namespace HealthDashboard
 			.ConfigureAppConfiguration((hostingContext, config) => {
 				_ = config
 					.AddJsonFile("appsettings.json", false, true)
-					.AddJsonFile($"logSettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
-					.AddJsonFile("hostsettings.json", true, true)
+					.AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
+					.AddJsonFile("healthchecks.json", true, true)
 					.AddJsonFile($"healthchecks.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true);
 				if (hostingContext.HostingEnvironment.IsDevelopment())
 				{
@@ -54,14 +56,14 @@ namespace HealthDashboard
 				}
 				else
 				{
-					_ = config.AddEnvironmentVariables("HealthDashboard_");
+					_ = config.AddEnvironmentVariables($"{EnvironmentPrefix}_");
 				}
 
 			})
 			.UseSerilog()
 			.ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
 
-		private static IConfiguration BuildConfiguration()
+		private static IConfiguration BuildLoggingConfiguration()
 		{
 			var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 			var configBuilder = new ConfigurationBuilder()
