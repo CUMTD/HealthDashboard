@@ -47,7 +47,7 @@ namespace HealthDashboard
 					.AddJsonFile("appsettings.json", false, true)
 					.AddJsonFile($"logSettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
 					.AddJsonFile("hostsettings.json", true, true)
-					.AddJsonFile($"hostsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true);
+					.AddJsonFile($"healthchecks.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true);
 				if (hostingContext.HostingEnvironment.IsDevelopment())
 				{
 					_ = config.AddUserSecrets<Program>();

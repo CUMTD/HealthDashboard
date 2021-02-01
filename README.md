@@ -10,6 +10,18 @@ It adds authentication, logging, DB storage, and custom CSS to the out of the bo
 
 ## Basic Configuration
 
+Custom configuraiton should not be committed to source control.
+By default, this application is configured to read from User Secrets in development
+and Environmental variables or a `healthchecks.json` file in production.
+
+For IIS, environmental variables should be prefixed with HealthDashboard_ and nested JSON should be indicated with a __.
+For example `HealthDashboard_AzureAD__Instance`. The exception to this is the connection strings.
+They should not be prefixed. For example `ConnectionStrings__HealthCheckConnection`.
+
+For the `healthchecks.json` file, simply include the JSON to add to the configuration.
+This should be used to define health checks and not to store sensitive connection string or OIDC items. See [Adding a Health Check
+](#Adding-a-Health-Check)
+
 ### Database
 
 The applicaiton logs health history to a database. You must add a connection string.
@@ -40,15 +52,17 @@ The steps outlined in [Microsoft's documentation][oidc-setup] may be helpful.
 ```
 
 ## Adding a Health Check
-
+These should be defined in `healthchecks.json`.
 ```json
-"HealthChecksUI": {
-	"HealthChecks": [
-		{
-			"Name": "Site Name",
-			"Uri": "https://example.com/healthz"
-		}
-	]
+{
+	"HealthChecksUI": {
+		"HealthChecks": [
+			{
+				"Name": "Site Name",
+				"Uri": "https://example.com/healthz"
+			}
+		]
+	}
 }
 ```
 
