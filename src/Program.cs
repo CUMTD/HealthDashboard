@@ -54,7 +54,7 @@ namespace HealthDashboard
 				}
 				else
 				{
-					config.AddEnvironmentVariables("HealthDashboard_");
+					_ = config.AddEnvironmentVariables("HealthDashboard_");
 				}
 
 			})
