@@ -1,0 +1,15 @@
+name: HealthDashboard - CI
+
+trigger: none
+
+pr:
+  autoCancel: true
+  branches:
+    include:
+    - main
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- template: template-build.yml

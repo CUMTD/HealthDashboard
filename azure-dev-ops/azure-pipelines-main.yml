@@ -1,0 +1,14 @@
+name: HealthDashboard - Release
+
+trigger:
+  branches:
+    include:
+    - main
+
+pr: none
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- template: build-template.yml
