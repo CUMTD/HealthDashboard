@@ -4,11 +4,30 @@ This dashboard uses [ASP.NET Health Checks][hc] and the [Health Checks UI][hcui]
 
 ## Basic Configuration
 
+### Database
+
 The applicaiton logs health history to a database. You must add a connection string.
 
 ```json
 "ConnectionStrings": {
-	"HealthCheckConnection": "Data Source=YOUR_SQL_SERVER.YOUR_DOMAIN.com;Initial Catalog=YOUR_DB_NAME;Integrated Security=False;Persist Security Info=True;User ID=YOUR_USER_ID;Password=YOUR_PW;MultipleActiveResultSets=True;"
+	"HealthCheckConnection": "Data Source={YOUR_SQL_SERVER.YOUR_DOMAIN.COM};Initial Catalog={YOUR_DB_NAME};Integrated Security=False;Persist Security Info=True;User ID={YOUR_USER_ID};Password={YOUR_PW};MultipleActiveResultSets=True;"
+}
+```
+
+### Authentication
+
+The application is configured to authenticate with [Azure Active Directory][azure].
+You must add the following Azure AD section to the application's configuartion.
+
+```json
+"AzureAd": {
+	"Instance": "https://login.microsoftonline.com/",
+	"Authority": "https://login.microsoftonline.com/{YOUR_TENNANT_ID}/v2.0/",
+	"TenantId": "{YOUR_TENNANT_ID}",
+	"ClientId": "{YOUR_CLIENT_ID}",
+	"CallbackPath": "/signin-oidc",
+	"ClientSecret": "{YOUR_CLIENT_SECRET}",
+	"Domain": "{YOUR_DOMAIN}"
 }
 ```
 
@@ -38,18 +57,12 @@ To enable Seq, in production add it to the `logSettings.json` config:
 		"Name": "Seq",
 		"Args": {
 			"serverUrl": "https://seq.example.com/",
-			"apiKey": "YOUR_KEY"
+			"apiKey": "{YOUR_KEY}"
 		}
 	  }
 	]
   }
 ```
-
-[hc]: https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-5.0
-[hcui]: https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
-[sl]: https://serilog.net/
-[seq]: https://datalust.co/seq
-
 
 ## License
 Copyright 2021 Champaign-Urbana Masss Transit District
@@ -65,3 +78,10 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+
+[hc]: https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-5.0
+[hcui]: https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
+[azure]: https://azure.microsoft.com/en-us/services/active-directory/
+[sl]: https://serilog.net/
+[seq]: https://datalust.co/seq

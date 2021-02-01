@@ -1,4 +1,6 @@
 using System;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +23,25 @@ namespace HealthDashboard
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			var dashboardConfig = _configuration.Get<DashboardConfig>();
+
+			_ = services.AddSingleton(dashboardConfig);
+
+			_ = services.Configure<IISServerOptions>(options => options.AutomaticAuthentication = false);
+
+			_ = services.AddHsts(options =>
+			{
+				options.Preload = true;
+				options.IncludeSubDomains = true;
+				options.MaxAge = TimeSpan.FromDays(365 * 2);
+			});
+
+			_ = services.AddRouting(options =>
+			{
+				options.LowercaseUrls = true;
+				options.AppendTrailingSlash = true;
+			});
+
 			_ = services.Configure<IISServerOptions>(options => options.AutomaticAuthentication = false);
 
 			_ = services.AddHsts(options =>
@@ -32,8 +53,21 @@ namespace HealthDashboard
 
 			_ = services
 				.AddHealthChecksUI()
-				.AddSqlServerStorage(_configuration.GetConnectionString("HealthCheckConnection"));
+				.AddSqlServerStorage(dashboardConfig.ConnectionStrings.HealthCheckConnection);
 
+			_ = services
+				.AddAuthentication(options => 
+				{
+					options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+					options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+				})
+				.AddCookie()
+				.AddOpenIdConnect(options => {
+					ConfigurationBinder.Bind(_configuration, "AzureAd", options);
+					options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+				});
+
+			_ = services.AddAuthorization();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,15 +77,26 @@ namespace HealthDashboard
 			{
 				_ = app.UseDeveloperExceptionPage();
 			}
+			else
+			{
+				_ = app.UseHsts();
+				_ = app.UseHttpsRedirection();
+			}
 
 			_ = app.UseStaticFiles();
 
 			_ = app.UseRouting();
 
-			_ = app.UseEndpoints(endpoints => _ = endpoints.MapHealthChecksUI(options => {
-				options.UIPath = "/";
-				_ = options.AddCustomStylesheet("wwwroot/css/mtd.css");
-			}));
+			_ = app.UseAuthentication();
+			_ = app.UseAuthorization();
+
+			_ = app
+				.UseEndpoints(endpoints => _ = endpoints.MapHealthChecksUI(options => {
+					options.UIPath = "/";
+					_ = options.AddCustomStylesheet("wwwroot/css/mtd.css");
+				})
+				.RequireAuthorization()
+			);
 		}
 	}
 }
