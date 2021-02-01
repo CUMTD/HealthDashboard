@@ -41,11 +41,9 @@ The steps outlined in [Microsoft's documentation][oidc-setup] may be helpful.
 
 ```json
 "AzureAd": {
-	"Instance": "https://login.microsoftonline.com/",
 	"Authority": "https://login.microsoftonline.com/{YOUR_TENNANT_ID}/v2.0/",
 	"TenantId": "{YOUR_TENNANT_ID}",
 	"ClientId": "{YOUR_CLIENT_ID}",
-	"CallbackPath": "/signin-oidc",
 	"ClientSecret": "{YOUR_CLIENT_SECRET}",
 	"Domain": "{YOUR_DOMAIN}"
 }
