@@ -1,6 +1,12 @@
 # Health Dashboard
 
-This dashboard uses [ASP.NET Health Checks][hc] and the [Health Checks UI][hcui] to create a health check dashboard for MTD's services.
+[![Build Status](https://dev.azure.com/cumtd/MTD/_apis/build/status/HealthDashboard/HealthDashboard%20-%20Main?branchName=main)](https://dev.azure.com/cumtd/MTD/_build/latest?definitionId=30&branchName=main)
+
+This dashboard uses [ASP.NET Health Checks][hc] and the [Health Checks UI][hcui]
+to create a health check dashboard.
+This application is a then wrapper around Health Checks UI.
+It adds authentication, logging, DB storage, and custom CSS to the out of the box experiance.
+
 
 ## Basic Configuration
 
