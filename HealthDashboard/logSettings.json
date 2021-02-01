@@ -12,7 +12,8 @@
 			"Override": {
 				"Microsoft": "Warning",
 				"System": "Warning",
-				"Microsoft.Hosting.Lifetime": "Information"
+				"Microsoft.Hosting.Lifetime": "Information",
+				"HealthChecks.UI": "Error"
 			}
 		},
 		"Enrich": [

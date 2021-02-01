@@ -5,7 +5,9 @@
 			"Override": {
 				"Microsoft": "Warning",
 				"System": "Warning",
-				"Microsoft.Hosting.Lifetime": "Warning"
+				"Microsoft.Hosting.Lifetime": "Warning",
+				"Microsoft.EntityFrameworkCore": "Warning",
+				"HealthChecks.UI":  "Information"
 			}
 		},
 		"WriteTo": [
