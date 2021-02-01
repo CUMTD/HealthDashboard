@@ -18,6 +18,8 @@ The applicaiton logs health history to a database. You must add a connection str
 
 The application is configured to authenticate with [Azure Active Directory][azure].
 You must add the following Azure AD section to the application's configuartion.
+You can get the Client values by registering an App in your Azure Active Directory.
+The steps outlined in [Microsoft's documentation][oidc-setup] may be helpful.
 
 ```json
 "AzureAd": {
@@ -83,5 +85,6 @@ limitations under the License.
 [hc]: https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-5.0
 [hcui]: https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
 [azure]: https://azure.microsoft.com/en-us/services/active-directory/
+[oidc-setup]: https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp#option-2-register-and-manually-configure-your-application-and-code-sample
 [sl]: https://serilog.net/
 [seq]: https://datalust.co/seq
