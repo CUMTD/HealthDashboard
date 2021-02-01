@@ -11,4 +11,4 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- template: build-template.yml
+- template: template-build.yml
